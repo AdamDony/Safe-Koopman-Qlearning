@@ -1,63 +1,61 @@
-<img src="docs/images/quanser-resources-header.png" width="100%">
+# SafeQ: Model-Free, Optimal, and Safe Q-Learning in Koopman Eigenfunction Coordinates
 
+Code accompanying the paper:
 
-# Quanser_Academic_Resources
-The [Quanser](https://www.quanser.com/) Academic Resources includes the research and teaching content for using Quanser products, including libraries, research examples, teaching content, user manuals, guides and more.
+> Md Nur-A-Adam Dony and Syed Ali Asad Rizvi,
+> "Model-Free, Optimal, and Safe Q-Learning in Koopman Eigenfunction Coordinates,"
+> submitted to *IEEE Transactions on Control Systems Technology*.
 
-This repository includes content for the following products: `Aero 2, Mechatronic Actuators Trainer, Mechatronic Sensors Trainer, QArm, QArm Mini, QBot Platform and older QBots, QCar, QCar 2, QDrone, QDrone 2, Qube-Servo 3`, and looking for resources on these solutions from [Quanser's website](https://www.quanser.com/) will redirect here. If you are looking for resources to other products, skip these instructions and refer to the section [Resources For Older Products](#resources-for-older-products).
+SafeQ learns a safe optimal feedback for input-affine discrete-time nonlinear
+systems purely from data: eigenfunction identification, quadratic Q-kernel
+learning by least-squares policy iteration, a certified forward-invariant
+safety region, and a model-free control-barrier filter — one pipeline, never
+using the drift `f` or input map `g`.
 
-### Table of Contents
-- [Downloading Resources](#downloading-resources)
-- [Setting Up Your Computer](#setting-up-your-computer)
-- [Getting Started With Content](#getting-started-with-content)
-- [Resources For Older Products](#resources-for-older-products)
-- [Changelog](changelog.txt)
+## Contents
 
+| Path | Description |
+|---|---|
+| `matlab/safe_qlearn_koopman_ALL.m` | Self-contained MATLAB script reproducing the paper's simulation studies: Example 1 (linear car lane-keeping, trivial lift) and Example 2 (nonlinear benchmark with data-identified eigenfunctions). Generates both 6-panel figures. |
+| `qcar/qcar_controller.py` | Real-time SafeQ controller for the Quanser QCar1 (Section IV-C): EKF pose estimation, bounded exploration with a known probe, least-squares plant/Q-kernel identification, instrumental-variable LSPI, stability gate, discrete CBF safety filter, and speed PI loop, at 100 Hz in the QLabs Cityscape digital twin. |
 
-## Downloading Resources
+## Requirements
 
-**Note:** If you are trying to set up a Raspberry Pi (4 or 5) to use with the Mechatronic Actuators Trainer and/or the Mechatronic Sensors Trainer, skip this guide and see [Raspberry Pi Setup](1_setup/raspberry_pi/pi_setup.pdf). These devices work both in Windows computers and Raspberry Pis.
+**MATLAB study** — base MATLAB R2018b+ (uses `yline`/`xline`/`sgtitle`).
+No toolboxes required; the reference DARE is solved by Riccati iteration.
 
-Before getting started with these resources, the first step is to download them into your computer. There is two ways to do this, using Git, or downloading the files simply as a .zip file. We recommend having our resources in a `C:/Users/user/Documents/Quanser` folder.
+```matlab
+>> safe_qlearn_koopman_ALL
+```
 
-### With Git
+Outputs `example1_car_matlab.pdf/.png` and `example2_vaidya_matlab.pdf/.png`.
 
-<details open>
-<summary>Installation using Git</summary>
+**QCar experiment** — Python 3.8+, `numpy`, `opencv-python`, `pyqtgraph`, and
+the Quanser Python API (`pal`, `hal`) that ships with [Quanser Interactive
+Labs](https://www.quanser.com/products/quanser-interactive-labs/) / QCar SDK.
+Launch the QLabs Cityscape environment, then:
 
-1. Install [Git](https://git-scm.com/downloads) in your system.
-2. Open your Documents folder and open a windows terminal in that folder.
-3. Run the following command to create the Quanser directory and copy the contents of this repo in there.
-    ```
-    git clone https://github.com/quanser/Quanser_Academic_Resources.git Quanser
-    ```
+```bash
+python qcar/qcar_controller.py
+```
 
-</details>
+The script runs a 25 s exploration phase (2500 samples at 100 Hz), identifies
+the error dynamics and safe Q-kernel from data, verifies the closed-loop
+spectral radius, and deploys the learned gain through the CBF filter and rate
+limiter. It works unchanged on the physical QCar1 (`IS_PHYSICAL_QCAR`).
 
-### Without Git
+## Citation
 
-<details>
-<summary>Installation without Git</summary>
+```bibtex
+@article{dony2026safeq,
+  author  = {Dony, Md Nur-A-Adam and Qureshi, Muhammad Zuhair and Rizvi, Syed Ali Asad},
+  title   = {Model-Free, Optimal, and Safe Q-Learning in Koopman Eigenfunction Coordinates},
+  journal = {IEEE Transactions on Control Systems Technology},
+  note    = {under review},
+  year    = {2026}
+}
+```
 
-1. On your system, create a folder called _Quanser_ under _Documents_. This should look like `C:/Users/user/Documents/Quanser`.
-2. Click the green Code button at the top of this GitHub page, click _Download ZIP_ at the bottom of the menu that pops up.
-3. Unzip the folder in your system.
-4. Go into _Quanser_Academic_Resources-main_ (you see the folders 0_libraries, 1_setup ...). Copy all the contents of that folder into your newly created Documents/Quanser folder.
-</details>
+## License
 
-## Setting Up Your Computer
-
-To begin using these resources, you will need to install the necessary software to your computer based on your intended method of interfacing with Quanser devices. This may involve working with either virtual and/or hardware systems, and utilizing Python and/or MATLAB/Simulink.
-
-- Follow the setup guide: [Computer Setup](docs/pc_setup.md).
-
-- Note that if a router was provided as part of your system: please DO NOT connect an internet cable to the router, this may cause unexpected behavior due to automatic router firmware updates.
-
-## Getting Started With Content
-
-For a comprehensive guide to getting started with these resources and using your Quanser products, follow [Getting Started With Content](6_teaching/README.md). 
-
-
-# Resources For Older Products
-
- **_For any other product not listed above, please visit the Quanser Website for [resources](https://www.quanser.com/resources/)._**
+MIT — see [LICENSE](LICENSE).
