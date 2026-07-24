@@ -48,7 +48,7 @@ limiter. It works unchanged on the physical QCar1 (`IS_PHYSICAL_QCAR`).
 
 ```bibtex
 @article{dony2026safeq,
-  author  = {Dony, Md Nur-A-Adam and Qureshi, Muhammad Zuhair and Rizvi, Syed Ali Asad},
+  author  = {Dony, Md Nur-A-Adam and Rizvi, Syed Ali Asad},
   title   = {Model-Free, Optimal, and Safe Q-Learning in Koopman Eigenfunction Coordinates},
   journal = {IEEE Transactions on Control Systems Technology},
   note    = {under review},
