@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.asv
+*.mat
+*.fig
+# generated figures
+example1_car_matlab.*
+example2_vaidya_matlab.*
+# OS cruft
+.DS_Store
+Thumbs.db
