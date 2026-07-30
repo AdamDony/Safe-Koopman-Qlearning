@@ -9,3 +9,6 @@ example2_vaidya_matlab.*
 # OS cruft
 .DS_Store
 Thumbs.db
+
+# vendored Quanser content is kept intact, exempt from the rules above
+!external/Quanser_Academic_Resources/**

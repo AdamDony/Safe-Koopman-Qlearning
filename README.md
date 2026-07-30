@@ -18,21 +18,7 @@ using the drift `f` or input map `g`.
 |---|---|
 | `matlab/safe_qlearn_koopman_ALL.m` | Self-contained MATLAB script reproducing the paper's simulation studies: Example 1 (linear car lane-keeping, trivial lift) and Example 2 (nonlinear benchmark with data-identified eigenfunctions). Generates both 6-panel figures. |
 | `qcar/qcar_controller.py` | Real-time SafeQ controller for the Quanser QCar1 (Section IV-C): EKF pose estimation, bounded exploration with a known probe, least-squares plant/Q-kernel identification, instrumental-variable LSPI, stability gate, discrete CBF safety filter, and speed PI loop, at 100 Hz in the QLabs Cityscape digital twin. |
-| `external/Quanser_Academic_Resources/` | Git submodule pointing to [Quanser Academic Resources](https://github.com/quanser/Quanser_Academic_Resources) (branch `dev-windows`): the official Quanser setup scripts, Python/MATLAB QLabs libraries (`pal`, `hal`, QVL), user manuals, and lab content needed to run the QCar experiment. |
-
-## Getting the code
-
-The Quanser resources are included as a git submodule, so clone with:
-
-```bash
-git clone --recurse-submodules https://github.com/AdamDony/Safe-Koopman-Qlearning.git
-```
-
-If you already cloned without submodules, fetch it afterwards with:
-
-```bash
-git submodule update --init --depth 1
-```
+| `external/Quanser_Academic_Resources/` | Full copy of [Quanser Academic Resources](https://github.com/quanser/Quanser_Academic_Resources) (branch `dev-windows`): the official Quanser setup scripts, Python/MATLAB QLabs libraries (`pal`, `hal`, QVL), user manuals, and lab content needed to run the QCar experiment. Bundled here so the repository is fully self-contained; see its own `LICENSE` for Quanser's terms. |
 
 ## Requirements
 
@@ -48,7 +34,7 @@ Outputs `example1_car_matlab.pdf/.png` and `example2_vaidya_matlab.pdf/.png`.
 **QCar experiment** — Python 3.8+, `numpy`, `opencv-python`, `pyqtgraph`, and
 the Quanser Python API (`pal`, `hal`) that ships with [Quanser Interactive
 Labs](https://www.quanser.com/products/quanser-interactive-labs/) / QCar SDK.
-The bundled `external/Quanser_Academic_Resources` submodule provides the
+The bundled `external/Quanser_Academic_Resources` folder provides the
 official setup scripts (`1_setup/`) and QLabs libraries (`0_libraries/`);
 follow its README to
 install the Quanser Python environment. Launch the QLabs Cityscape
