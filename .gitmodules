@@ -1,0 +1,5 @@
+[submodule "external/Quanser_Academic_Resources"]
+	path = external/Quanser_Academic_Resources
+	url = https://github.com/quanser/Quanser_Academic_Resources.git
+	branch = dev-windows
+	shallow = true
