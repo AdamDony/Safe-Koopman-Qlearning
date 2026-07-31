@@ -12,6 +12,18 @@ learning by least-squares policy iteration, a certified forward-invariant
 safety region, and a model-free control-barrier filter — one pipeline, never
 using the drift `f` or input map `g`.
 
+## Demo video
+
+▶️ **[SafeQ live on the QCar1 in the QLabs digital twin](https://youtu.be/qVR-Z1SXMU4)**
+
+The Quanser QCar1 running the complete model-free SafeQ pipeline
+(`qcar/qcar_controller.py`) in real time at 100 Hz in the QLabs Cityscape
+virtual environment: a 25 s exploration phase with a known probe,
+least-squares identification of the error dynamics and Q-kernel,
+LSPI-learned safe gain (matching the identified-plant DARE gain), then
+deployment through the discrete CBF safety filter — the car tracks the
+reference lane with cross-track error kept within ±0.10 m.
+
 ## Contents
 
 | Path | Description |
